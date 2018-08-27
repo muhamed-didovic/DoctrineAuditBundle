@@ -102,7 +102,8 @@ class AuditSubscriber implements EventSubscriber
                         $this->dissociated[] = [
                             $collection->getOwner(),
                             $entity,
-                            $this->id($em, $entity),
+                            //$this->id($em, $entity),
+                            $this->id($em, $collection->getOwner()),
                             $mapping,
                         ];
                     }
