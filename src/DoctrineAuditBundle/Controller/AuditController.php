@@ -29,7 +29,7 @@ class AuditController extends Controller
      * @Template
      * @Route("/audit/{entity}/{id}", name="dh_doctrine_audit_show_entity_history")
      */
-    public function showEntityHistoryAction(string $entity, int $id = null, int $page = 1, int $pageSize = 50)
+    public function showEntityHistoryAction(string $entity, $id = null, int $page = 1, int $pageSize = 50)
     {
         $reader = $this->container->get('dh_doctrine_audit.reader');
         $entries = $reader->getAudits($entity, $id, $page, $pageSize);

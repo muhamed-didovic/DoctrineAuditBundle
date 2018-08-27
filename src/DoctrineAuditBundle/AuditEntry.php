@@ -67,7 +67,7 @@ class AuditEntry
      *
      * @return int
      */
-    public function getObjectId(): ?int
+    public function getObjectId()
     {
         return $this->object_id;
     }

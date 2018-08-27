@@ -59,7 +59,7 @@ class AuditReader
      *
      * @return array
      */
-    public function getAudits($entity, int $id = null, int $page = 1, int $pageSize = 50): array
+    public function getAudits($entity, $id = null, int $page = 1, int $pageSize = 50): array
     {
         $connection = $this->entityManager->getConnection();
         $auditTable = implode('', [
