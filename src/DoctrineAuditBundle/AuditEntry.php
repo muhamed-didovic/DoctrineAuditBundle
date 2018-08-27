@@ -117,7 +117,7 @@ class AuditEntry
      *
      * @return array
      */
-    public function getDiffs(): ?array
+    public function getDiffs()
     {
         return json_decode($this->diffs, true);
     }
