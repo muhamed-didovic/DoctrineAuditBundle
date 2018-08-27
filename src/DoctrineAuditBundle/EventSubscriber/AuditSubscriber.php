@@ -161,9 +161,9 @@ class AuditSubscriber implements EventSubscriber
             $this->dissociate($em, $source, $target, $id, $mapping);
         }
 
-        foreach ($this->removed as list($entity, $id)) {
-            $this->remove($em, $entity, $id);
-        }
+//        foreach ($this->removed as list($entity, $id)) {
+//            $this->remove($em, $entity, $id);
+//        }
 
         $this->inserted = [];
         $this->updated = [];
