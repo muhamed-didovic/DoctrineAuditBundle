@@ -20,6 +20,7 @@ services:
     arguments: ["@dh_doctrine_audit.configuration", "@doctrine.orm.default_entity_manager"]
     tags:
       - { name: doctrine.event_subscriber, connection: default }
+    public: true
 
   dh_doctrine_audit.twig_extension:
     class: DH\DoctrineAuditBundle\Twig\Extension\TwigExtension
