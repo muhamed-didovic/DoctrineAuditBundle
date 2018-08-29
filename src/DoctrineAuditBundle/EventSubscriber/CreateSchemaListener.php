@@ -7,29 +7,14 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Doctrine\ORM\Tools\Event\GenerateSchemaTableEventArgs;
 use Doctrine\ORM\Tools\ToolEvents;
-use Doctrine\ORM\EntityManagerInterface;
 
 class CreateSchemaListener implements EventSubscriber
 {
-    /**
-     * @var AuditConfiguration
-     */
-    private $configuration;
-    
-    /**
-     * @var EntityManagerInterface
-     */
-    private $entityManager;
-    
-    /**
-     * CreateSchemaListener constructor.
-     * @param AuditConfiguration     $configuration
-     * @param EntityManagerInterface $entityManager
-     */
-    public function __construct(AuditConfiguration $configuration, EntityManagerInterface $entityManager)
+    protected $configuration;
+
+    public function __construct(AuditConfiguration $configuration)
     {
         $this->configuration = $configuration;
-        $this->entityManager = $entityManager;
     }
 
     public function postGenerateSchemaTable(GenerateSchemaTableEventArgs $eventArgs)
@@ -69,7 +54,12 @@ class CreateSchemaListener implements EventSubscriber
         } else {
             $auditTablename = $this->configuration->getTablePrefix().$entityTable->getName().$this->configuration->getTableSuffix();
         }
-
+    
+        //check if table is already present
+        if ($schema->hasTable($auditTablename)) {
+            return;
+        }
+        
         $auditTable = $schema->createTable($auditTablename);
         $auditTable->addColumn('id', 'integer', [
             'autoincrement' => true,
