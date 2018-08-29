@@ -10,11 +10,25 @@ use Doctrine\ORM\Tools\ToolEvents;
 
 class CreateSchemaListener implements EventSubscriber
 {
-    protected $configuration;
-
-    public function __construct(AuditConfiguration $configuration)
+    /**
+     * @var AuditConfiguration
+     */
+    private $configuration;
+    
+    /**
+     * @var EntityManagerInterface
+     */
+    private $entityManager;
+    
+    /**
+     * CreateSchemaListener constructor.
+     * @param AuditConfiguration     $configuration
+     * @param EntityManagerInterface $entityManager
+     */
+    public function __construct(AuditConfiguration $configuration, EntityManagerInterface $entityManager)
     {
         $this->configuration = $configuration;
+        $this->entityManager = $entityManager;
     }
 
     public function postGenerateSchemaTable(GenerateSchemaTableEventArgs $eventArgs)
